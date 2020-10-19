@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Add questions for assessment {{ assessment.name }}</h1>
+    <form action="{% url 'questions_management' assessment.UUID %}" method="post">
+        {% csrf_token %}
+        <p><label for="id_description">Question:</label> <input type="text" name="description" maxlength="255"
+                                                                required="" id="id_description"></p>
+        <input type="submit" value="Add">
+    </form>
+    <table>
+        <tbody>
+        {% for question in assessment.question_set.all %}
+            <tr>
+                <td>{{ question.description }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if assessment.question_set.all.count > 0 %}
+        <form action='{% url 'assessment_formula' assessment.UUID %}' method='get'>
+            <button type='submit'>Next</button>
+        </form>
+    {% endif %}
+{% endblock %}

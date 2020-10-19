@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <table>
+        <tbody>
+        <tr>
+            <td>Assessment name</td>
+            <td>{{ assessment.name }}</td>
+        </tr>
+        <tr>
+            <td>Number of Questions</td>
+            <td>{{ statistics.number_of_questions }}</td>
+        </tr>
+        {% if assessment.score_formula %}
+            <tr>
+                <td>Score formula</td>
+                <td>{{ assessment.score_formula }}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td>UUID</td>
+            <td>{{ assessment.UUID }}</td>
+        </tr>
+        <tr>
+            <td>URL to see the report</td>
+            <td>
+                <a href="http://{{ request.get_host }}/assessments/{{ assessment.UUID }}/report/">http://{{ request.get_host }}/assessments/{{ assessment.UUID }}/report/</a>
+            </td>
+        </tr>
+        <tr>
+            <td>URL to complete the assessment</td>
+            <td>
+                <a href="http://{{ request.get_host }}/assessments/{{ assessment.UUID }}/">http://{{ request.get_host }}/assessments/{{ assessment.UUID }}/</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Total submits</td>
+            <td>{{ statistics.number_of_submits }}</td>
+        </tr>
+        {% if assessment.score_formula %}
+            <tr>
+                <td>Average score for successful submits</td>
+                <td>{{ statistics.average_score }}</td>
+            </tr>
+        {% endif %}
+        {% if assessment.score_formula %}
+            <tr>
+                <td>Total submits containing error in score calculation</td>
+                <td>{{ statistics.number_of_submits_containing_error }}</td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+
+{% endblock %}

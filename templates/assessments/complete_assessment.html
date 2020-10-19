@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ assessment.name }}</h1>
+    <form action="{% url 'complete_assessment' assessment.UUID %}" method="post">
+        {% csrf_token %}
+        <table>
+            <tbody>
+            {% for question in assessment.question_set.all %}
+                <tr>
+                    <td>{{ question.description }}</td>
+
+                    <td>
+                        <p>
+                            <label for="answer"></label>
+                            <input type='number' min="1" max="5" name='answer_list' required id="answer">
+                        </p>
+                        {{ answer_form.as_p }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<table>
+    <tbody>
+    <tr>
+        <td>New Assessment</td>
+        <td>
+            <form action='{% url 'new_assessment' %}' method='GET'>
+                <button type='submit'> Create</button>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td>Complete existing assessment</td>
+        <td>
+            <form action='{% url 'main' %}' method='POST'>
+                {% csrf_token %}
+                <label>
+                    <input type="text" name="assessment_id" required>
+                </label>
+                <button type='submit'> Start</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+{%  endblock content %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p>
+        Score: {{ submit.score }}
+    </p>
+
+    {% if submit.error %}
+        <p>
+            Message: {{ submit.error }}
+        <p>
+    {% endif %}
+
+
+{% endblock %}
